@@ -1,7 +1,6 @@
 const user_credential=require('../models/user_credential');
 
 module.exports.dashboard=function(req,res){
-    // console.log(res);
     return res.render('user_dashboard',{
         title:'User Dashboard'
     })
