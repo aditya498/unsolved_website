@@ -1,1 +1,20 @@
 <h1>Home Page</h1>
+
+<% if(locals.user){ %>
+    <form action="/question/create" method="POST">
+        <textarea name="content" cols="30" rows="3" placeholder="Type your question here..." required></textarea>
+        <input type="submit" value="Ask">
+    </form>
+<% } %>
+
+<ul>
+    <% for(ques of questions){ %>
+        <li>
+            <p> 
+                <%= ques.content %>
+                <br>
+                <%= ques.user.name %>
+            </p>
+        </li>
+    <%}%>
+</ul>
