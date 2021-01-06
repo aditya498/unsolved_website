@@ -1,4 +1,5 @@
 const question=require('../models/question');
+const answer=require('../models/answer');
 
 module.exports.create_question=function(req,res){
     question.create({
@@ -21,3 +22,17 @@ module.exports.display_user_question=function(req,res){
         });
     });
 };
+
+
+module.exports.delete_question=function(req,res){
+    question.findById(req.params.id,function(err,ques){
+        if(ques.user==req.user.id){
+            ques.remove();
+            answer.deleteMany({question:req.params.id},function(err){
+                return res.redirect('back');
+            })
+        }else{
+            return res.redirect('back');
+        }
+    })
+}

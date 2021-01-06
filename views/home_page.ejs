@@ -19,6 +19,10 @@
                 </small>
             </p>
             
+            <% if(locals.user && locals.user.id==ques.user.id){%>
+                <a href="/question/delete/<%= ques.id %>"><b>Delete</b></a>
+            <%}%>
+
             <% if(locals.user){ %>
                 <form action="answer/create" method="POST">
                     <textarea name="content" cols="30" rows="3" placeholder="Type your answer here..." required></textarea>
