@@ -42,6 +42,11 @@
                                 <%= ans.user.name %>
                             </small>
                         </p>
+                        
+                        <% if(locals.user && locals.user.id ==ans.user.id){%>
+                            <a href="/answer/delete/<%= ans.id %>"><b>Delete</b></a>
+                        <%}%>
+
                     </li>
                 <%}%>
             </ul>

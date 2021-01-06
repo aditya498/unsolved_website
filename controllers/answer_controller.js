@@ -17,3 +17,19 @@ module.exports.create_answer=function(req,res){
     })
 };
 
+
+module.exports.delete_answer=function(req,res){
+    answer.findById(req.params.id,function(err,ans){
+        if(ans.user==req.user.id){
+            let ques_id=ans.question;
+            ans.remove();
+            question.findByIdAndUpdate(ques_id,{$pull:{answers:req.params.id}},function(err,ques){
+                return res.redirect('back');
+            })
+        }else{
+            return res.redirect('back');
+        }
+    })
+};
+
+
