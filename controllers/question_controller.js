@@ -24,8 +24,9 @@ module.exports.display_user_question=function(req,res){
 };
 
 
-module.exports.delete_question=function(req,res){
-    question.findById(req.params.id,function(err,ques){
+module.exports.delete_question=async function(req,res){
+    try{
+        let ques=await question.findById(req.params.id);
         if(ques.user==req.user.id){
             ques.remove();
             answer.deleteMany({question:req.params.id},function(err){
@@ -34,5 +35,7 @@ module.exports.delete_question=function(req,res){
         }else{
             return res.redirect('back');
         }
-    })
+    }catch(err){
+        console.log(err);
+    }
 }
