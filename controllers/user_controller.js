@@ -52,11 +52,13 @@ module.exports.create_account=function(req,res){
 };
 
 module.exports.create_session=function(req,res){
+    req.flash('success','user succesfully logged in');
     return res.redirect('/user/dashboard');
 };
 
 module.exports.destroy_session=function(req,res){
     req.logout();
+    req.flash('success','user succesfully logged out');
     return res.redirect('/');
 }
 
