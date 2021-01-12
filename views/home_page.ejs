@@ -7,49 +7,9 @@
     </form>
 <% } %>
 
+
 <ul>
     <% for(ques of questions){ %>
-        <li>
-            
-            <p> 
-                <%= ques.content %>
-                <br>
-                <small>
-                    <%= ques.user.name %>
-                </small>
-            </p>
-            
-            <% if(locals.user && locals.user.id==ques.user.id){%>
-                <a href="/question/delete/<%= ques.id %>"><b>Delete</b></a>
-            <%}%>
-
-            <% if(locals.user){ %>
-                <form action="answer/create" method="POST">
-                    <textarea name="content" cols="30" rows="3" placeholder="Type your answer here..." required></textarea>
-                    <input type="hidden" name="question_id" value="<%= ques._id %>">
-                    <input type="submit" value="submit">
-                </form>
-            <%}%>
-            
-
-            <ul>
-                <% for(ans of ques.answers){%>
-                    <li>
-                        <p> 
-                            <%= ans.content %>
-                            <br>
-                            <small>
-                                <%= ans.user.name %>
-                            </small>
-                        </p>
-                        
-                        <% if(locals.user && locals.user.id ==ans.user.id){%>
-                            <a href="/answer/delete/<%= ans.id %>"><b>Delete</b></a>
-                        <%}%>
-
-                    </li>
-                <%}%>
-            </ul>
-        </li>
+        <%- include('_question'); %>
     <%}%>
 </ul>
