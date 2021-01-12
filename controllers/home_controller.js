@@ -3,6 +3,7 @@ const question=require('../models/question');
 module.exports.home=async function(req,res){
     try{
         let ques=await question.find({})
+        .sort('-createdAt')
         .populate('user')
         .populate({
             path:'answers',
