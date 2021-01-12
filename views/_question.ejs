@@ -9,7 +9,7 @@
     </p>
     
     <% if(locals.user && locals.user.id==ques.user.id){%>
-        <a href="/question/delete/<%= ques.id %>"><b>Delete</b></a>
+        <a class ="delete_question_btn" href="/question/delete/<%= ques.id %>"><b>Delete</b></a>
     <%}%>
 
     <% if(locals.user){ %>

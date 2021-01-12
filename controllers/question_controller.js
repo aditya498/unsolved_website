@@ -1,17 +1,30 @@
 const question=require('../models/question');
 const answer=require('../models/answer');
+const user_cred=require('../models/user_credential');
 
-module.exports.create_question=function(req,res){
-    question.create({
-        content: req.body.content,
-        user:req.user._id
-    },function(err,ques){
-        if(err){
-            console.log('Error in creating question');
-            return;
+module.exports.create_question=async function(req,res){
+    try{
+        let ques=await question.create({
+            content: req.body.content,
+            user:req.user._id
+        });
+        
+        let user=await user_cred.findById(req.user._id);
+
+        if(req.xhr){
+            return res.status(200).json({
+                data:{
+                    question:ques,
+                    user_name:user.name
+                },
+                message:"question created"
+            })
         }
+
         return res.redirect('back');
-    })
+    }catch(err){
+    console.log('Error in creating question:',err);
+    }
 };
 
 module.exports.display_user_question=function(req,res){

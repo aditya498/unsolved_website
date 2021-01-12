@@ -1,15 +1,19 @@
 <h1>Home Page</h1>
 
 <% if(locals.user){ %>
-    <form action="/question/create" method="POST">
+    <form id="new_question_form" action="/question/create" method="POST">
         <textarea name="content" cols="30" rows="3" placeholder="Type your question here..." required></textarea>
         <input type="submit" value="Ask">
     </form>
 <% } %>
 
 
-<ul>
-    <% for(ques of questions){ %>
-        <%- include('_question'); %>
-    <%}%>
-</ul>
+<div id='question_container'>
+    <ul>
+        <% for(ques of questions){ %>
+            <%- include('_question'); %>
+        <%}%>
+    </ul>
+</div>
+
+<script src="./scripts/question.js"></script>
